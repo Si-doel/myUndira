@@ -1,0 +1,63 @@
+[
+  {
+    "id": 1,
+    "title": "Pengajuan Surat Aktif Kuliah",
+    "category": "Akademik",
+    "description": "Layanan pengajuan surat keterangan aktif kuliah bagi mahasiswa yang masih terdaftar aktif di Universitas Dian Nusantara.",
+    "requirements": [
+      "Mahasiswa berstatus aktif",
+      "Memiliki NIM",
+      "Melengkapi identitas mahasiswa"
+    ],
+    "procedure": [
+      "Mahasiswa menyiapkan persyaratan.",
+      "Mahasiswa menghubungi bagian administrasi akademik.",
+      "Petugas melakukan verifikasi data.",
+      "Surat diterbitkan setelah proses verifikasi selesai."
+    ],
+    "contact": "Bagian Administrasi Akademik",
+    "status": "Tersedia"
+  },
+  {
+    "id": 2,
+    "title": "Informasi Kartu Hasil Studi (KHS)",
+    "category": "Akademik",
+    "description": "Layanan informasi mengenai hasil studi mahasiswa pada semester yang telah diselesaikan.",
+    "requirements": ["Memiliki NIM", "Terdaftar sebagai mahasiswa aktif"],
+    "procedure": [
+      "Mahasiswa menyiapkan NIM.",
+      "Mahasiswa mengakses layanan akademik.",
+      "Mahasiswa menghubungi petugas jika membutuhkan bantuan."
+    ],
+    "contact": "Bagian Administrasi Akademik",
+    "status": "Tersedia"
+  },
+  {
+    "id": 3,
+    "title": "Informasi Pembayaran Kuliah",
+    "category": "Keuangan",
+    "description": "Layanan informasi mengenai tagihan dan administrasi pembayaran biaya perkuliahan.",
+    "requirements": ["Memiliki NIM", "Mengetahui periode pembayaran"],
+    "procedure": [
+      "Mahasiswa menyiapkan NIM.",
+      "Mahasiswa menghubungi bagian keuangan.",
+      "Petugas memberikan informasi tagihan dan pembayaran."
+    ],
+    "contact": "Bagian Keuangan",
+    "status": "Tersedia"
+  },
+  {
+    "id": 4,
+    "title": "Informasi Beasiswa Mahasiswa",
+    "category": "Kemahasiswaan",
+    "description": "Layanan informasi mengenai program beasiswa dan persyaratan pendaftaran bagi mahasiswa.",
+    "requirements": ["Memiliki NIM", "Memenuhi persyaratan program beasiswa"],
+    "procedure": [
+      "Mahasiswa mencari informasi program beasiswa.",
+      "Mahasiswa memeriksa persyaratan.",
+      "Mahasiswa menghubungi bagian kemahasiswaan untuk informasi pendaftaran."
+    ],
+    "contact": "Bagian Kemahasiswaan",
+    "status": "Tersedia"
+  }
+]

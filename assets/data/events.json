@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Seminar Teknologi Digital",
+    "category": "Seminar",
+    "description": "Seminar mengenai perkembangan teknologi digital dan inovasi masa depan.",
+    "date": "2026-12-10",
+    "time": "09:00",
+    "location": "Auditorium UNDIRA",
+    "image": "assets/images/events/seminar.jpg",
+    "organizer": "Universitas Dian Nusantara",
+    "status": "Upcoming"
+  },
+  {
+    "id": 2,
+    "title": "Workshop UI/UX Design",
+    "category": "Workshop",
+    "description": "Workshop pengenalan desain antarmuka dan pengalaman pengguna.",
+    "date": "2026-12-15",
+    "time": "13:00",
+    "location": "Laboratorium Komputer",
+    "image": "assets/images/events/workshop.jpg",
+    "organizer": "Himpunan Mahasiswa",
+    "status": "Upcoming"
+  },
+  {
+    "id": 3,
+    "title": "Pameran Karya Mahasiswa",
+    "category": "Pameran",
+    "description": "Pameran hasil kreativitas dan inovasi mahasiswa.",
+    "date": "2026-12-20",
+    "time": "10:00",
+    "location": "Area Kampus",
+    "image": "assets/images/events/pameran.jpg",
+    "organizer": "BEM UNDIRA",
+    "status": "Upcoming"
+  }
+]
