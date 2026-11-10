@@ -4,9 +4,15 @@ import '../config/app_theme.dart';
 import '../widgets/module_card.dart';
 import '../widgets/section_header.dart';
 import '../widgets/custom_button.dart';
+
 import '../models/event_model.dart';
+import '../models/service_model.dart';
+
 import '../services/event_service.dart';
+import '../services/student_service.dart';
+
 import '../widgets/event_card.dart';
+import '../widgets/service_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,12 +25,17 @@ class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
 
   final EventService _eventService = EventService();
+  final StudentService _studentService = StudentService();
+
   late Future<List<EventModel>> _eventsFuture;
+  late Future<List<ServiceModel>> _servicesFuture;
 
   @override
   void initState() {
     super.initState();
+
     _eventsFuture = _eventService.getEvents();
+    _servicesFuture = _studentService.getServices();
   }
 
   void showComingSoon(String module) {
@@ -52,7 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // HEADER
-
               Row(
                 children: [
                   Expanded(
@@ -62,7 +72,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       alignment: Alignment.centerLeft,
                     ),
                   ),
-
                   IconButton(
                     onPressed: () {
                       showComingSoon('Notifikasi');
@@ -114,7 +123,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: Stack(
                   children: [
-                    // Background Image
                     Positioned.fill(
                       child: Image.asset(
                         'assets/images/Gedung.png',
@@ -123,7 +131,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
 
-                    // Blue Gradient Overlay
                     Positioned.fill(
                       child: DecoratedBox(
                         decoration: BoxDecoration(
@@ -141,7 +148,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
 
-                    // Banner Content
                     Padding(
                       padding: const EdgeInsets.all(22),
                       child: Column(
@@ -171,7 +177,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
                           const SizedBox(height: 15),
 
-                          // Explore Button
                           CustomButton(
                             text: 'Jelajahi Sekarang',
                             icon: Icons.arrow_forward,
@@ -193,7 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: 15),
 
-              // ROW 1
+              // ACTIVE MODULES ONLY
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -225,53 +230,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
 
-              const SizedBox(height: 12),
-
-              // ROW 2
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: ModuleCard(
-                      title: 'Fasilitas Kampus',
-                      description: 'Jelajahi fasilitas kampus',
-                      icon: Icons.location_city_rounded,
-                      onTap: () {
-                        showComingSoon('Fasilitas Kampus');
-                      },
-                    ),
-                  ),
-
-                  const SizedBox(width: 12),
-
-                  Expanded(
-                    child: ModuleCard(
-                      title: 'UMKM & Kantin',
-                      description: 'Temukan kuliner kampus',
-                      icon: Icons.storefront_rounded,
-                      onTap: () {
-                        showComingSoon('UMKM & Kantin');
-                      },
-                    ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 12),
-
-              // ROW 3
-              ModuleCard(
-                title: 'UKM & Komunitas',
-                description: 'Kenali organisasi dan komunitas mahasiswa',
-                icon: Icons.groups_rounded,
-                onTap: () {
-                  showComingSoon('UKM & Komunitas');
-                },
-              ),
-
               const SizedBox(height: 30),
 
-              // EVENT & AGENDA SECTION
+              // EVENT TERBARU SECTION
               SectionHeader(
                 title: 'Event Terbaru',
                 onSeeAll: () {
@@ -318,6 +279,63 @@ class _HomeScreenState extends State<HomeScreen> {
                             context,
                             '/event-detail',
                             arguments: event,
+                          );
+                        },
+                      );
+                    }).toList(),
+                  );
+                },
+              ),
+
+              const SizedBox(height: 30),
+
+              // LAYANAN TERBARU SECTION
+              SectionHeader(
+                title: 'Layanan Mahasiswa',
+                onSeeAll: () {
+                  navigateModule('/services');
+                },
+              ),
+
+              const SizedBox(height: 15),
+
+              FutureBuilder<List<ServiceModel>>(
+                future: _servicesFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(20),
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }
+
+                  if (snapshot.hasError) {
+                    return const Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text('Gagal memuat layanan mahasiswa.'),
+                    );
+                  }
+
+                  final services = snapshot.data ?? [];
+
+                  if (services.isEmpty) {
+                    return const Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text('Belum ada layanan tersedia.'),
+                    );
+                  }
+
+                  return Column(
+                    children: services.take(2).map((service) {
+                      return ServiceCard(
+                        service: service,
+                        onDetailPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/service-detail',
+                            arguments: service,
                           );
                         },
                       );
